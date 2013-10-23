@@ -18,6 +18,7 @@ public class MainMenu extends JFrame
 	/** Konstruktor okna MainFrame */
 	public MainMenu()
 	{
+		//Drobna zmiana
 		this.add(buttonPanle);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Arkanoid- menu");
