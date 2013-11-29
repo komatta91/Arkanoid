@@ -3,6 +3,7 @@ package arkaoid.view;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class MainMenuButtonPanel extends JPanel
 {
 	/** Domyœlna wysokoœæ przycisku */
