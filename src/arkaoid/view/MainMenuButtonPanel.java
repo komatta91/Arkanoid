@@ -29,7 +29,7 @@ public class MainMenuButtonPanel extends JPanel
 	{
 		imageInit();
 		initLayoutMenager();
-		
+		//
 		addButton("Nowa Gra");
 		addButton("Zakoñcz");
 		for (JButton b : przyciski)
