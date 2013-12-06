@@ -2,21 +2,22 @@ package arkaoid.model;
 
 import arkaoid.controller.Controller;
 
-public class Model implements Runnable 
+public class Model extends Thread
 {
 	/** Obiekt kontrolera */
 	private Controller controller;
-	
+
 	/**
 	 * Konstruktor bezparametrowy modelu
 	 */
 	public Model()
 	{
-		
+
 	}
 
 	/**
 	 * Konstruktor obieltu model z parametrem
+	 * 
 	 * @param controller
 	 */
 	public Model(Controller controller)
@@ -25,7 +26,7 @@ public class Model implements Runnable
 	}
 
 	@Override
-	public void run() 
+	public void run()
 	{
 		// TODO Auto-generated method stub
 
@@ -33,6 +34,7 @@ public class Model implements Runnable
 
 	/**
 	 * Metoda zwracaj¹ca kontroler modelu
+	 * 
 	 * @return Controller
 	 */
 	public Controller getController()
@@ -42,6 +44,7 @@ public class Model implements Runnable
 
 	/**
 	 * Metoda ustawiaj¹ca kontroler modelu
+	 * 
 	 * @param controller
 	 */
 	public void setController(Controller controller)

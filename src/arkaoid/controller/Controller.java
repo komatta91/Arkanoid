@@ -1,76 +1,48 @@
 package arkaoid.controller;
 
-import arkaoid.model.Model;
-import arkaoid.view.View;
+import java.util.concurrent.BlockingQueue;
 
-public class Controller implements Runnable 
+import arkaoid.model.Model;
+import arkaoid.view.AbstractGameAction;
+
+public class Controller extends Thread
 {
 	/** Obiekt model */
-	private Model model;
-	/** Obiekt widok */
-	private View view;
+	private final Model model;
 
-	/**
-	 * Bezparametrowy konstruktor obiektu kontrolera
-	 */
-	public Controller()
+	private BlockingQueue<AbstractGameAction> bq;
+
+	public Controller(BlockingQueue<AbstractGameAction> bq, Model model)
 	{
-		
-	}
-	
-	/**
-	 * Kontruktor obiektu kontrolera z parametrami
-	 * @param view
-	 * @param model
-	 */
-	public Controller(View view, Model model)
-	{
-		this.view = view;
 		this.model = model;
+		this.bq = bq;
 	}
-	
+
 	@Override
-	public void run() 
+	public void run()
 	{
 		// TODO Auto-generated method stub
-		view.setVisableMainMenu(true);
-	}
-	
-	/**
-	 * Medoda ustawiaj¹ca pole model dla kontrolera
-	 * @param model
-	 */
-	public void setModel(Model model)
-	{
-		this.model = model;
+		while (true)
+		{
+			try
+			{
+				//System.out.println("Take");
+				AbstractGameAction action = bq.take();
+				System.out.println(action);
+				//if (action.toString() == "Zakoñcz")
+					//break;
+			} catch (InterruptedException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 	}
 
-	/**
-	 * Metoda ustawiaj¹ca widok dla kontrolera
-	 * @param view
-	 */
-	public void setView(View view)
-	{
-		this.view = view;
-	}
-
-	/**
-	 * Metoda zwracaj¹da obiekt model kontrolera
-	 * @return Model
-	 */
 	public Model getModel()
 	{
 		return model;
 	}
-
-	/**
-	 * Metoda zwracaj¹ca obiekt widok kontrolera
-	 * @return
-	 */
-	public View getView()
-	{
-		return view;
-	}
-
 
 }

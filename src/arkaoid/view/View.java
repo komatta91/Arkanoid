@@ -1,63 +1,45 @@
 package arkaoid.view;
 
-import arkaoid.controller.Controller;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
-public class View implements Runnable 
+public class View extends Thread
 {
 	/** Obiekt kontroler */
-	private Controller controller;
+	// private Controller controller;
 	private MainMenu mainMenu;
-	
+	private final BlockingQueue<AbstractGameAction> bq;
+
 	/**
 	 * Bezparametrowy konstruktor obiektu widoku
 	 */
-	public View()
+	public View(BlockingQueue<AbstractGameAction> bq)
 	{
+		this.bq = bq;
 		this.initComponents();
 	}
-	
+
 	/**
 	 * Konstruktor obiektu widoku z parametrem
+	 * 
 	 * @param controller
 	 */
-	public View(Controller controller)
-	{
-		this.controller = controller;
-		this.initComponents();
-	}
-	
+	// public View(Controller controller)
+	// {
+	// this.controller = controller;
+	// this.initComponents();
+	// }
 
 	@Override
-	public void run() 
+	public void run()
 	{
 		// TODO Auto-generated method stub
 
 	}
-	
-	/**
-	 * Metoda zwracaj¹ca kontroler widoku
-	 * @return Controller
-	 */
-	public Controller getController()
-	{
-		return controller;
-	}
 
-	/**
-	 * Metoda ustawiaj¹ca kontrolera widoku
-	 * @param controller
-	 */
-	public void setController(Controller controller)
+	public BlockingQueue<AbstractGameAction> getBQ()
 	{
-		this.controller = controller;
-	}
-	
-	/**
-	 * Metoda pokazuj¹ca menu g³ówne
-	 */
-	public void setVisableMainMenu(boolean visable)
-	{
-		mainMenu.setVisible(visable);
+		return bq;
 	}
 
 	/**
@@ -65,7 +47,8 @@ public class View implements Runnable
 	 */
 	private void initComponents()
 	{
-		mainMenu = new MainMenu();
+		mainMenu = new MainMenu(bq);
+		mainMenu.setVisible(true);
 		return;
 	}
 }
