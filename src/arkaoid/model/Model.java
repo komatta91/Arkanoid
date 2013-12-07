@@ -1,25 +1,21 @@
 package arkaoid.model;
 
 import arkaoid.controller.Controller;
+import arkaoid.model.strategy.ExitStrategy;
+import arkaoid.model.strategy.NewGameStrategy;
+import arkaoid.model.strategy.StartStrategy;
+import arkaoid.model.strategy.TimerStrategy;
 
 public class Model extends Thread
 {
 	/** Obiekt kontrolera */
 	private Controller controller;
 
-	/**
-	 * Konstruktor bezparametrowy modelu
-	 */
 	public Model()
 	{
 
 	}
 
-	/**
-	 * Konstruktor obieltu model z parametrem
-	 * 
-	 * @param controller
-	 */
 	public Model(Controller controller)
 	{
 		this.controller = controller;
@@ -32,23 +28,45 @@ public class Model extends Thread
 
 	}
 
-	/**
-	 * Metoda zwracaj¹ca kontroler modelu
-	 * 
-	 * @return Controller
-	 */
 	public Controller getController()
 	{
 		return controller;
 	}
 
-	/**
-	 * Metoda ustawiaj¹ca kontroler modelu
-	 * 
-	 * @param controller
-	 */
 	public void setController(Controller controller)
 	{
 		this.controller = controller;
+	}
+	
+	public void doStrategy(NewGameStrategy s)
+	{
+		System.out.println("New Game");
+		Dummy dummy = new Dummy();
+		dummy.setGame(true);
+		dummy.setTimer(true);
+		controller.passDummy(dummy);
+	}
+	
+	
+	public void doStrategy(ExitStrategy s)
+	{
+		System.out.println("Exit");
+		Dummy dummy = new Dummy();
+		dummy.setExit(true);
+		dummy.setMenu(true);
+		controller.passDummy(dummy);
+	}
+	
+	public void doStrategy(TimerStrategy s)
+	{
+		System.out.println("Time");
+	}
+	
+	public void doStrategy(StartStrategy s)
+	{
+		System.out.println("Start");
+		Dummy dummy = new Dummy();
+		dummy.setMenu(true);
+		controller.passDummy(dummy);
 	}
 }

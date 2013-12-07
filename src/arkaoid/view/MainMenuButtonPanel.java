@@ -15,6 +15,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import arkaoid.view.action.AbstractGameAction;
+import arkaoid.view.action.ExitButtonAction;
+import arkaoid.view.action.NewGameButtonAction;
+
 @SuppressWarnings("serial")
 public class MainMenuButtonPanel extends JPanel
 {
@@ -30,20 +34,28 @@ public class MainMenuButtonPanel extends JPanel
 		imageInit();
 		initLayoutMenager();
 		//
-		addButton("Nowa Gra");
-		addButton("Zakoñcz");
+		addButton("Nowa Gra").addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				bq.add(new NewGameButtonAction());
+			}
+
+		});
+		addButton("Zakoñcz").addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				bq.add(new ExitButtonAction());
+			}
+
+		});
 		for (JButton b : przyciski)
 		{
-			b.addActionListener(new ActionListener()
-			{
-
-				@Override
-				public void actionPerformed(ActionEvent e)
-				{
-					bq.add(new ButtonAction(e.getActionCommand()));
-				}
-
-			});
 			this.add(b);
 		}
 	}
@@ -81,9 +93,10 @@ public class MainMenuButtonPanel extends JPanel
 		return image.getHeight() + imageY;
 	}
 	
-	private boolean addButton(String name)
+	private JButton addButton(String name)
 	{
 		JButton nowy = new JButton(name);
-		return przyciski.add(nowy);
+		przyciski.add(nowy);
+		return nowy;
 	}
 }
