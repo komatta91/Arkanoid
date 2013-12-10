@@ -25,9 +25,9 @@ public class ExitButtonAction extends ButtonAction
 			return true;
 		if (obj == null)
 			return false;
-		if(getClass() != obj.getClass())
+		if (getClass() != obj.getClass())
 			return false;
 		return true;
-	}	
+	}
 
 }

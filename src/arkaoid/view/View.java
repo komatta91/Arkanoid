@@ -7,6 +7,7 @@ import java.util.concurrent.BlockingQueue;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import arkaoid.ArkanoidStatic;
 import arkaoid.ExitException;
 import arkaoid.model.Dummy;
 import arkaoid.view.action.AbstractGameAction;
@@ -15,9 +16,10 @@ import arkaoid.view.action.TimerAction;
 public class View extends Thread
 {
 	private MainMenu mainMenu;
+	private GameFrame gameFrame;
 	private final BlockingQueue<AbstractGameAction> bq;
 	private Timer timer;
-
+	
 	public View(BlockingQueue<AbstractGameAction> bq)
 	{
 		this.bq = bq;
@@ -50,6 +52,12 @@ public class View extends Thread
 		{
 			timer.stop();
 		}
+		gameFrame.setVisible(dummy.isGame());
+		if (dummy.getPalette() != null)
+		{
+			//
+			gameFrame. setPaleteCentre(dummy.getPalette());
+		}
 
 	}
 
@@ -71,7 +79,9 @@ public class View extends Thread
 			}
 
 		});
-		// mainMenu.setVisible(true);
+
+		gameFrame = new GameFrame(bq);
+
 		return;
 	}
 

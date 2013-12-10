@@ -1,6 +1,6 @@
 package arkaoid.view.action;
 
-public class TimerAction extends AbstractGameAction
+public class StartAction extends WindowAction
 {
 
 	@Override

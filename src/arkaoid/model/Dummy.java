@@ -1,11 +1,14 @@
 package arkaoid.model;
 
+import java.awt.Point;
+
 public class Dummy
 {
 	private boolean menu = false;
 	private boolean exit = false;
 	private boolean timer = false;
 	private boolean game = false;
+	private Point palette = null;
 
 	public boolean isMenu()
 	{
@@ -45,6 +48,16 @@ public class Dummy
 	public void setGame(boolean game)
 	{
 		this.game = game;
+	}
+
+	public Point getPalette()
+	{
+		return palette;
+	}
+
+	public void setPalette(Point palette)
+	{
+		this.palette = palette;
 	}
 
 }

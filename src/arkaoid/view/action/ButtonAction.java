@@ -1,6 +1,6 @@
 package arkaoid.view.action;
 
-public abstract class ButtonAction extends AbstractGameAction 
+public abstract class ButtonAction extends AbstractGameAction
 {
 
 }

@@ -1,20 +1,33 @@
 package arkaoid.view.action;
 
-public class NewGameButtonAction extends ButtonAction
+import java.awt.Point;
+
+public class MouseMoveAction extends AbstractGameAction
 {
+	private Point point;
+
+	public MouseMoveAction(Point point)
+	{
+		this.point = point;
+	}
+
+	public MouseMoveAction()
+	{
+
+	}
 
 	@Override
 	public int compareTo(Object o)
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return this.getClass().toString().hashCode();
 	}
 
 	@Override
 	public int hashCode()
 	{
 		// TODO Auto-generated method stub
-		return this.getClass().toString().hashCode();
+		return 0;
 	}
 
 	@Override
@@ -28,6 +41,16 @@ public class NewGameButtonAction extends ButtonAction
 		if (getClass() != obj.getClass())
 			return false;
 		return true;
+	}
+
+	public Point getPoint()
+	{
+		return point;
+	}
+
+	public void setPoint(Point point)
+	{
+		this.point = point;
 	}
 
 }

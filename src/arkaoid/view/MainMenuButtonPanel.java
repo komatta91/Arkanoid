@@ -1,5 +1,6 @@
 package arkaoid.view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import arkaoid.ArkanoidStatic;
 import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.ExitButtonAction;
 import arkaoid.view.action.NewGameButtonAction;
@@ -25,14 +27,16 @@ public class MainMenuButtonPanel extends JPanel
 
 	private List<JButton> przyciski = new LinkedList<JButton>();
 	private BufferedImage image;
-	private int imageX = 0; //(MainMenu.DEFAULT_WIDTH - image.getWidth()) / 2;
+	private int imageX = 0; // (MainMenu.DEFAULT_WIDTH - image.getWidth()) / 2;
 	private int imageY = 10;
-	//Point p;
+
+	// Point p;
 
 	public MainMenuButtonPanel(final BlockingQueue<AbstractGameAction> bq)
 	{
 		imageInit();
 		initLayoutMenager();
+		setBackground(Color.WHITE);
 		//
 		addButton("Nowa Gra").addActionListener(new ActionListener()
 		{
@@ -56,7 +60,7 @@ public class MainMenuButtonPanel extends JPanel
 		});
 		for (JButton b : przyciski)
 		{
-			this.add(b);
+			add(b);
 		}
 	}
 
@@ -64,7 +68,7 @@ public class MainMenuButtonPanel extends JPanel
 	{
 		LayoutMenuMenager mgr = new LayoutMenuMenager();
 		mgr.setImageBottom(getImageBottom());
-		this.setLayout(mgr);
+		setLayout(mgr);
 	}
 
 	private void imageInit()
@@ -73,26 +77,26 @@ public class MainMenuButtonPanel extends JPanel
 		try
 		{
 			image = ImageIO.read(imageFile);
-			imageX = (MainMenu.DEFAULT_WIDTH - image.getWidth()) / 2;
+			imageX = (int)((ArkanoidStatic.MENU_DIMENSION.getWidth() - image.getWidth()) / 2);
 		} catch (IOException e)
 		{
 			System.err.println("Blad odczytu obrazka");
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void paintComponent(Graphics g)
 	{
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(image, imageX, imageY, this);
 	}
-	
+
 	public int getImageBottom()
 	{
 		return image.getHeight() + imageY;
 	}
-	
+
 	private JButton addButton(String name)
 	{
 		JButton nowy = new JButton(name);

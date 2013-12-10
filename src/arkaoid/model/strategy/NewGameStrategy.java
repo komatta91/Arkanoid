@@ -10,7 +10,7 @@ public class NewGameStrategy extends AbstractStrategy
 	{
 		// TODO Auto-generated method stub
 		model.doStrategy(this);
-		
+
 	}
 
 }
