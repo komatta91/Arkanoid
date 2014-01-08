@@ -1,9 +1,12 @@
 package arkaoid.model;
 
+import java.awt.Point;
+
 import arkaoid.controller.Controller;
 import arkaoid.model.strategy.ExitStrategy;
 import arkaoid.model.strategy.MouseMoveStrategy;
 import arkaoid.model.strategy.NewGameStrategy;
+import arkaoid.model.strategy.StartMoveStrategy;
 import arkaoid.model.strategy.StartStrategy;
 import arkaoid.model.strategy.TimerStrategy;
 
@@ -12,7 +15,9 @@ public class Model extends Thread
 	/** Obiekt kontrolera */
 	private Controller controller;
 	private Palette palette = new Palette();
-	
+	private Ball ball = new Ball();
+	private boolean gamePause = false;
+
 	public Model()
 	{
 
@@ -43,6 +48,9 @@ public class Model extends Thread
 	public void doStrategy(NewGameStrategy s)
 	{
 		System.out.println("New Game");
+		gamePause = false;
+		ball.stopMoving();
+		ball.reRandom();
 		Dummy dummy = new Dummy();
 		dummy.setGame(true);
 		dummy.setTimer(true);
@@ -60,11 +68,14 @@ public class Model extends Thread
 
 	public void doStrategy(TimerStrategy s)
 	{
-		//System.out.println("Time");
+		// System.out.println("Time");
+		//ball.reRandom();
 		Dummy dummy = new Dummy();
 		dummy.setGame(true);
 		dummy.setTimer(true);
 		dummy.setPalette(palette.getPalette());
+		ball.move();
+		dummy.setBall(ball.getPoint());
 		controller.passDummy(dummy);
 	}
 
@@ -75,10 +86,26 @@ public class Model extends Thread
 		dummy.setMenu(true);
 		controller.passDummy(dummy);
 	}
-	
+
 	public void doStrategy(MouseMoveStrategy s)
 	{
-		//System.out.println("MouseMove");
-		palette.setPoint(s.getPoint());
+		// System.out.println("MouseMove");
+		if (!gamePause)
+		{
+			palette.setPoint(s.getPoint());
+			if (!ball.isMoving())
+			{
+				ball.setPoint(palette.getPalette());
+			}
+		}
+	}
+
+	public void doStrategy(StartMoveStrategy s)
+	{
+		// System.out.println("MouseMove");
+		if (!ball.isMoving() && !gamePause)
+		{
+			ball.startMoving();
+		}
 	}
 }

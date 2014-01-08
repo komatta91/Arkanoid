@@ -12,6 +12,7 @@ import arkaoid.model.strategy.AbstractStrategy;
 import arkaoid.model.strategy.ExitStrategy;
 import arkaoid.model.strategy.MouseMoveStrategy;
 import arkaoid.model.strategy.NewGameStrategy;
+import arkaoid.model.strategy.StartMoveStrategy;
 import arkaoid.model.strategy.StartStrategy;
 import arkaoid.model.strategy.TimerStrategy;
 import arkaoid.view.View;
@@ -19,6 +20,7 @@ import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.ExitButtonAction;
 import arkaoid.view.action.MouseMoveAction;
 import arkaoid.view.action.NewGameButtonAction;
+import arkaoid.view.action.PlayAction;
 import arkaoid.view.action.StartAction;
 import arkaoid.view.action.TimerAction;
 
@@ -113,7 +115,7 @@ public class Controller extends Thread
 		map.put(new TimerAction(), new TimerStrategy());
 		map.put(new StartAction(), new StartStrategy());
 		map.put(new MouseMoveAction(), new MouseMoveStrategy());
-		// dodaæ timer i showmenu
+		map.put(new PlayAction(), new StartMoveStrategy());
 	}
 
 }

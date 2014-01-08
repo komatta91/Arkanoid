@@ -47,6 +47,7 @@ public class View extends Thread
 		}
 		if (dummy.isTimer())
 		{
+			gameFrame.repaint();
 			timer.start();
 		} else
 		{
@@ -57,6 +58,11 @@ public class View extends Thread
 		{
 			//
 			gameFrame. setPaleteCentre(dummy.getPalette());
+		}
+		if (dummy.getBall() != null)
+		{
+			//
+			gameFrame. setBallCentre(dummy.getBall());
 		}
 
 	}

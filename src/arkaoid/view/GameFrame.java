@@ -43,6 +43,7 @@ public class GameFrame extends JFrame
 		// scorePanel.setMaximumSize(new Dimension(10, 10));
 		// scorePanel.setSize(new Dimension(10, 10));
 		// add(scorePanel);
+		
 		addWindowListener(new WindowAdapter()
 		{
 			public void windowClosing(WindowEvent evt)
@@ -56,5 +57,11 @@ public class GameFrame extends JFrame
 	{
 		// TODO Auto-generated method stub
 		 gamePanel.setPaleteCentre(palette);
+	}
+	
+	public void setBallCentre(Point ball)
+	{
+		// TODO Auto-generated method stub
+		 gamePanel.setBallCentre(ball);
 	}
 }

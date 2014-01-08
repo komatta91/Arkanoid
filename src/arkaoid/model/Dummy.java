@@ -9,6 +9,7 @@ public class Dummy
 	private boolean timer = false;
 	private boolean game = false;
 	private Point palette = null;
+	private Point ball = null;
 
 	public boolean isMenu()
 	{
@@ -58,6 +59,16 @@ public class Dummy
 	public void setPalette(Point palette)
 	{
 		this.palette = palette;
+	}
+
+	public Point getBall()
+	{
+		return ball;
+	}
+
+	public void setBall(Point ball)
+	{
+		this.ball = ball;
 	}
 
 }

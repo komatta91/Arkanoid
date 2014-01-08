@@ -4,12 +4,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.concurrent.BlockingQueue;
 
+import arkaoid.model.strategy.StartMoveStrategy;
 import arkaoid.view.action.AbstractGameAction;
+import arkaoid.view.action.PlayAction;
 import arkaoid.view.action.StartAction;
 
 public class GameKeyListener implements KeyListener
 {
-	final BlockingQueue<AbstractGameAction> bq;
+	private final BlockingQueue<AbstractGameAction> bq;
 
 	public GameKeyListener(final BlockingQueue<AbstractGameAction> bq)
 	{
@@ -22,6 +24,11 @@ public class GameKeyListener implements KeyListener
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
 		{
 			bq.add(new StartAction());
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		{
+			System.out.println("Spacja");
+			bq.add(new PlayAction());
 		}
 	}
 

@@ -1,5 +1,6 @@
 package arkaoid;
 
+import java.awt.geom.Line2D;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -14,7 +15,9 @@ public class Arkanoid
 	public static void main(String[] args)
 	{
 		// TODO Auto-generated method stub
-
+		
+		
+		
 		final BlockingQueue<AbstractGameAction> bq = new LinkedBlockingQueue<AbstractGameAction>();
 		Model model = new Model();
 		View widok = new View(bq);

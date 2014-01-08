@@ -7,7 +7,7 @@ import arkaoid.ArkanoidStatic;
 public class Palette
 {
 	private Point point = new Point(0,
-			(int) (ArkanoidStatic.GAME_PANEL_DIMENSION.getHeight() - ArkanoidStatic.PALETTE_DIMENSION.getHeight() * 3));
+			(int) (ArkanoidStatic.GAME_PANEL_DIMENSION.getHeight() - ArkanoidStatic.PALETTE_DIMENSION.getHeight() - 10));
 
 	public Point getPalette()
 	{
