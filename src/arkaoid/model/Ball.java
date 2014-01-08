@@ -33,6 +33,7 @@ public class Ball
 		if (Math.random() > 0.5) random = -random;
 		dx = (int) random ;
 		if (dx == 0 || dy == 0) reRandom();
+		///Test
 	}
 	
 	public void startMoving()
