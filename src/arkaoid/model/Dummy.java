@@ -1,6 +1,7 @@
 package arkaoid.model;
 
 import java.awt.Point;
+import java.util.List;
 
 public class Dummy
 {
@@ -10,6 +11,7 @@ public class Dummy
 	private boolean game = false;
 	private Point palette = null;
 	private Point ball = null;
+	private List<BrickMod> points;
 
 	public boolean isMenu()
 	{
@@ -69,6 +71,16 @@ public class Dummy
 	public void setBall(Point ball)
 	{
 		this.ball = ball;
+	}
+
+	public List<BrickMod> getPoints()
+	{
+		return points;
+	}
+
+	public void setPoints(List<BrickMod> list)
+	{
+		this.points = list;
 	}
 
 }

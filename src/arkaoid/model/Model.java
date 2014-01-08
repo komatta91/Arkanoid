@@ -2,6 +2,7 @@ package arkaoid.model;
 
 import java.awt.Point;
 
+import arkaoid.ArkanoidStatic;
 import arkaoid.controller.Controller;
 import arkaoid.model.strategy.ExitStrategy;
 import arkaoid.model.strategy.MouseMoveStrategy;
@@ -17,6 +18,7 @@ public class Model extends Thread
 	private Palette palette = new Palette();
 	private Ball ball = new Ball();
 	private boolean gamePause = false;
+	private Bricks bricks = new Bricks();
 
 	public Model()
 	{
@@ -48,6 +50,9 @@ public class Model extends Thread
 	public void doStrategy(NewGameStrategy s)
 	{
 		System.out.println("New Game");
+		//System.out.println(bricks.count());
+		bricks.make();
+		//bricks.print();
 		gamePause = false;
 		ball.stopMoving();
 		ball.reRandom();
@@ -75,7 +80,15 @@ public class Model extends Thread
 		dummy.setTimer(true);
 		dummy.setPalette(palette.getPalette());
 		ball.move();
+		while ((bricks.isHit(ball.getPoint(), ArkanoidStatic.BALL_RADIUS)))
+		{
+			//ball.change();
+			ball.move();
+		}
 		dummy.setBall(ball.getPoint());
+		
+		dummy.setPoints(bricks.getBricks());
+		//bricks.print();
 		controller.passDummy(dummy);
 	}
 

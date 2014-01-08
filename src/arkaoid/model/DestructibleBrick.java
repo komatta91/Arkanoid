@@ -28,4 +28,13 @@ public class DestructibleBrick extends Brick
 			return false;
 		}
 	}
+
+	@Override
+	public int getLife()
+	{
+		// TODO Auto-generated method stub
+		return life;
+	}
+	
+	
 }

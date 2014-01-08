@@ -1,6 +1,5 @@
 package arkaoid;
 
-import java.awt.geom.Line2D;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 

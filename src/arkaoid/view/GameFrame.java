@@ -3,12 +3,14 @@ package arkaoid.view;
 import java.awt.Point;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.geom.Rectangle2D;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
 import javax.swing.JFrame;
 
 import arkaoid.ArkanoidStatic;
+import arkaoid.model.BrickMod;
 import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.StartAction;
 
@@ -63,5 +65,10 @@ public class GameFrame extends JFrame
 	{
 		// TODO Auto-generated method stub
 		 gamePanel.setBallCentre(ball);
+	}
+	
+	public void setPoints(List<BrickMod> points)
+	{
+		gamePanel.setPoints(points);
 	}
 }

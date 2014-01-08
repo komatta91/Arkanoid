@@ -16,6 +16,7 @@ public abstract class Brick
 
 	public Brick(Point point)
 	{
+		
 		this.point = point;
 	}
 	
@@ -28,10 +29,23 @@ public abstract class Brick
 	{
 		Ellipse2D ball = new Ellipse2D.Double();
 		ball.setFrame(point.x, point.y, radius, radius);
-		Rectangle2D brick = new Rectangle2D.Double(point.x, point.y, width, height);
+		Rectangle2D brick = new Rectangle2D.Double(this.point.x, this.point.y, width, height);
 		Area area = new Area(ball);
+		//if (area.intersects(brick)) System.out.println("x = " + this.point.x + ", y =" + this.point.y);
 		return area.intersects(brick);
 	}
 	
 	abstract public boolean hit();
+	
+	public void print()
+	{
+		System.out.println("x = " + point.x + ", y =" + point.y);
+	}
+	
+	public Point getPoint()
+	{
+		return (Point) this.point.clone();
+	}
+	
+	public abstract int getLife();
 }

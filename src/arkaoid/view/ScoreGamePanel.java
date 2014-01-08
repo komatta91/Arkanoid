@@ -18,6 +18,6 @@ public class ScoreGamePanel extends JPanel
 	public ScoreGamePanel()
 	{
 		setSize(dimension);
-		setBackground(Color.RED);
+		setBackground(Color.LIGHT_GRAY);
 	}
 }

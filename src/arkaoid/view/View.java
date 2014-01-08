@@ -64,6 +64,10 @@ public class View extends Thread
 			//
 			gameFrame. setBallCentre(dummy.getBall());
 		}
+		if (dummy.getPoints() != null)
+		{
+			gameFrame.setPoints(dummy.getPoints());
+		}
 
 	}
 

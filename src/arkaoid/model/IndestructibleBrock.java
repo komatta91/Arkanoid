@@ -19,6 +19,13 @@ public class IndestructibleBrock extends Brick
 	{
 		return true;
 	}
+
+	@Override
+	public int getLife()
+	{
+		// TODO Auto-generated method stub
+		return -1;
+	}
 	
 
 }
