@@ -1,39 +1,36 @@
 package arkaoid.model.strategy;
 
-import java.awt.Point;
-
 import arkaoid.model.Model;
 
 public class MouseMoveStrategy extends AbstractStrategy
 {
-	private Point point;
-
-	public MouseMoveStrategy(Point point)
+	private int dx;
+	public MouseMoveStrategy(int dx)
 	{
-		this.setPoint(point);
+		this.setDx(dx);
 	}
-
 	public MouseMoveStrategy()
 	{
-		
+		this.setDx(0);
 	}
-
+	
 	@Override
 	public void doStrategy(Model model)
 	{
 		// TODO Auto-generated method stub
-		//System.out.println("Dziala");
 		model.doStrategy(this);
 	}
-
-	public Point getPoint()
+	
+	
+	public int getDx()
 	{
-		return point;
+		return dx;
 	}
-
-	public void setPoint(Point point)
+	public void setDx(int dx)
 	{
-		this.point = point;
+		this.dx = dx;
 	}
+	
+
 
 }

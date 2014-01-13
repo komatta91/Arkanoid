@@ -1,26 +1,26 @@
 package arkaoid.view.action;
 
-import java.awt.Point;
 
 public class MouseMoveAction extends AbstractGameAction
 {
-	private Point point;
-
-	public MouseMoveAction(Point point)
-	{
-		this.point = point;
-	}
-
+	private int dx;
+	
 	public MouseMoveAction()
 	{
-
+		dx = 0;
 	}
+	
+	public MouseMoveAction(int dx)
+	{
+		this.setDx(dx);
+	}
+
 
 	@Override
 	public int compareTo(Object o)
 	{
 		// TODO Auto-generated method stub
-		return this.getClass().toString().hashCode();
+		return 0;
 	}
 
 	@Override
@@ -34,23 +34,14 @@ public class MouseMoveAction extends AbstractGameAction
 	public boolean equals(Object obj)
 	{
 		// TODO Auto-generated method stub
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		return true;
+		return false;
 	}
-
-	public Point getPoint()
+	public int getDx()
 	{
-		return point;
+		return dx;
 	}
-
-	public void setPoint(Point point)
+	public void setDx(int dx)
 	{
-		this.point = point;
+		this.dx = dx;
 	}
-
 }

@@ -71,4 +71,16 @@ public class GameFrame extends JFrame
 	{
 		gamePanel.setPoints(points);
 	}
+
+	public void setLife(int life)
+	{
+		// TODO Auto-generated method stub
+		scorePanel.setLife(life);
+	}
+
+	public void setScore(int score)
+	{
+		// TODO Auto-generated method stub
+		scorePanel.setScore(score);
+	}
 }

@@ -29,7 +29,10 @@ public class GameFramePanel extends JPanel
 	{
 		setSize(ArkanoidStatic.GAME_PANEL_DIMENSION);
 		setBackground(new Color(133, 133, 233));
-		addMouseMotionListener(new GameMouseListener(bq));
+		GameMouseListener ml = new GameMouseListener(bq);
+		addMouseMotionListener(ml);
+		addMouseListener(ml);
+		
 	}
 
 	public void paintComponent(Graphics g)
@@ -63,16 +66,19 @@ public class GameFramePanel extends JPanel
 			rectFrame.setFrame(rect);
 			switch (p.getLife())
 			{
-				case 1: g2.setColor(Color.MAGENTA); break;
-				case 2: g2.setColor(Color.GRAY); break;
-				case 3: g2.setColor(Color.GREEN); break;
-				default: g2.setColor(Color.ORANGE); break;
+				case 1: g2.setColor(Color.PINK); break;
+				case 2: g2.setColor(Color.MAGENTA); break;
+				case 3: g2.setColor(new Color(248,88,35)); break;
+				case -1: g2.setColor(Color.ORANGE); break;
+				//case 4: g2.setColor(Color.BLACK); break;
+				default: g2.setColor(Color.BLACK); break;
 			}
 			//g2.setColor(Color.MAGENTA);
 			g2.fill(rect);
 			g2.draw(rect);
 			g2.setColor(Color.BLACK);
 			g2.draw(rectFrame);
+			
 		}
 		
 	}

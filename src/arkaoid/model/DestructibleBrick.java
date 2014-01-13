@@ -35,6 +35,21 @@ public class DestructibleBrick extends Brick
 		// TODO Auto-generated method stub
 		return life;
 	}
+
+	@Override
+	public void decreasLife()
+	{
+		// TODO Auto-generated method stub
+		--this.life;
+		
+	}
+
+	@Override
+	public boolean isDestructible()
+	{
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 	
 }

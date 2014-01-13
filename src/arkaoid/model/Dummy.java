@@ -12,6 +12,8 @@ public class Dummy
 	private Point palette = null;
 	private Point ball = null;
 	private List<BrickMod> points;
+	private int life;
+	private int score;
 
 	public boolean isMenu()
 	{
@@ -81,6 +83,26 @@ public class Dummy
 	public void setPoints(List<BrickMod> list)
 	{
 		this.points = list;
+	}
+
+	public int getLife()
+	{
+		return life;
+	}
+
+	public void setLife(int life)
+	{
+		this.life = life;
+	}
+
+	public int getScore()
+	{
+		return score;
+	}
+
+	public void setScore(int score)
+	{
+		this.score = score;
 	}
 
 }

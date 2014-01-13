@@ -48,4 +48,6 @@ public abstract class Brick
 	}
 	
 	public abstract int getLife();
+	public abstract void decreasLife();
+	public abstract boolean isDestructible();
 }

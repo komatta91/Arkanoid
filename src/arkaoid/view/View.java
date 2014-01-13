@@ -68,6 +68,9 @@ public class View extends Thread
 		{
 			gameFrame.setPoints(dummy.getPoints());
 		}
+		
+		gameFrame.setLife(dummy.getLife());
+		gameFrame.setScore(dummy.getScore());
 
 	}
 
@@ -104,11 +107,21 @@ public class View extends Thread
 		{
 			case JOptionPane.YES_OPTION:
 				mainMenu.dispose();
+				gameFrame.dispose();
 				throw new ExitException();
 			case JOptionPane.NO_OPTION:
 				break;
 		}
 
+	}
+	public void winn()
+	{
+		JOptionPane.showMessageDialog(null, "Wygra³eœ.");
+	}
+	
+	public void loos()
+	{
+		JOptionPane.showMessageDialog(null, "Przegra³eœ.");
 	}
 
 }

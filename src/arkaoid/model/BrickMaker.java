@@ -56,8 +56,8 @@ public class BrickMaker
 
 	private Brick makeBrick(long i)
 	{
-		int life = 0;
-		for (int j = 0; j < 3; ++j)
+		int life = 1;
+		for (int j = 0; j < 2; ++j)
 		{
 			if (Math.random() > 0.5)
 			{
@@ -70,7 +70,7 @@ public class BrickMaker
 			p = points.get(i++);
 			if (i > this.count) i = 0;
 		}
-		System.out.println("Numer Klocka: " + i);
+		//System.out.println("Numer Klocka: " + i);
 		points.remove(--i);
 		if (Math.random() > 0.9)
 		{

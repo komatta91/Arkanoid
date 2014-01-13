@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
+import javax.swing.JOptionPane;
+
 import arkaoid.ExitException;
+import arkaoid.GameOverException;
 import arkaoid.model.Dummy;
 import arkaoid.model.Model;
+import arkaoid.model.NoBricksException;
 import arkaoid.model.strategy.AbstractStrategy;
 import arkaoid.model.strategy.ExitStrategy;
 import arkaoid.model.strategy.MouseMoveStrategy;
@@ -19,6 +23,8 @@ import arkaoid.view.View;
 import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.ExitButtonAction;
 import arkaoid.view.action.MouseMoveAction;
+import arkaoid.view.action.MouseMoveLeftAction;
+import arkaoid.view.action.MouseMoveRightAction;
 import arkaoid.view.action.NewGameButtonAction;
 import arkaoid.view.action.PlayAction;
 import arkaoid.view.action.StartAction;
@@ -55,18 +61,46 @@ public class Controller extends Thread
 				AbstractGameAction action = bq.take();
 				AbstractStrategy s = map.get(action);
 				
+				if (s instanceof MouseMoveStrategy)
+				{
+					MouseMoveAction a = (MouseMoveAction) action;
+					((MouseMoveStrategy) s).setDx(((MouseMoveAction) action).getDx());
+				}
+				//e.printStackTrace();
 				try
 				{
-					MouseMoveStrategy st = (MouseMoveStrategy)s;
-					MouseMoveAction act = (MouseMoveAction)action;
-					st.setPoint(act.getPoint());
-					st.doStrategy(model);
-					
-				}catch(ClassCastException e)
-				{
-					//e.printStackTrace();
 					s.doStrategy(model);
+				} catch (GameOverException e)
+				{
+					// TODO Auto-generated catch block
+					//System.out.println("Przegra³eœ!!!");
+					EventQueue.invokeLater(new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							view.loos();;
+						}
+
+					});
+					new StartStrategy().doStrategy(model);
+					
+				} catch (NoBricksException e)
+				{
+					// TODO Auto-generated catch block
+					//System.out.println("Wygra³eœ!!!");
+					EventQueue.invokeLater(new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							view.winn();;
+						}
+
+					});
+					new StartStrategy().doStrategy(model);
 				}
+				
 				
 				
 				// if (action.toString() == "Zakoñcz")
@@ -114,8 +148,10 @@ public class Controller extends Thread
 		map.put(new ExitButtonAction(), new ExitStrategy());
 		map.put(new TimerAction(), new TimerStrategy());
 		map.put(new StartAction(), new StartStrategy());
-		map.put(new MouseMoveAction(), new MouseMoveStrategy());
+		//map.put(new MouseMoveAction(), new MouseMoveStrategy());
 		map.put(new PlayAction(), new StartMoveStrategy());
+		map.put(new MouseMoveLeftAction(), new MouseMoveStrategy());
+		map.put(new MouseMoveRightAction(), new MouseMoveStrategy());
 	}
 
 }

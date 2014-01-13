@@ -26,6 +26,20 @@ public class IndestructibleBrock extends Brick
 		// TODO Auto-generated method stub
 		return -1;
 	}
+
+	@Override
+	public void decreasLife()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isDestructible()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 }
