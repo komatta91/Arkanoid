@@ -5,13 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
-import javax.swing.JOptionPane;
-
-import arkaoid.ExitException;
-import arkaoid.GameOverException;
+import arkaoid.Exceptons.ExitException;
+import arkaoid.Exceptons.GameOverException;
+import arkaoid.Exceptons.NoBricksException;
 import arkaoid.model.Dummy;
 import arkaoid.model.Model;
-import arkaoid.model.NoBricksException;
 import arkaoid.model.strategy.AbstractStrategy;
 import arkaoid.model.strategy.ExitStrategy;
 import arkaoid.model.strategy.MouseMoveStrategy;
@@ -35,7 +33,6 @@ public class Controller extends Thread
 	/** Obiekt model */
 	private final Model model;
 	private final View view;
-	private Dummy dummy;
 	private final BlockingQueue<AbstractGameAction> bq;
 	private final Map<AbstractGameAction, AbstractStrategy> map = new HashMap<AbstractGameAction, AbstractStrategy>();
 
@@ -63,14 +60,13 @@ public class Controller extends Thread
 				
 				if (s instanceof MouseMoveStrategy)
 				{
-					MouseMoveAction a = (MouseMoveAction) action;
 					((MouseMoveStrategy) s).setDx(((MouseMoveAction) action).getDx());
 				}
 				//e.printStackTrace();
 				try
 				{
 					s.doStrategy(model);
-				} catch (GameOverException e)
+				} catch (final GameOverException e)
 				{
 					// TODO Auto-generated catch block
 					//System.out.println("Przegra³eœ!!!");
@@ -79,13 +75,13 @@ public class Controller extends Thread
 						@Override
 						public void run()
 						{
-							view.loos();;
+							view.loos(e.getMessage());
 						}
 
 					});
 					new StartStrategy().doStrategy(model);
 					
-				} catch (NoBricksException e)
+				} catch (final NoBricksException e)
 				{
 					// TODO Auto-generated catch block
 					//System.out.println("Wygra³eœ!!!");
@@ -94,7 +90,7 @@ public class Controller extends Thread
 						@Override
 						public void run()
 						{
-							view.winn();;
+							view.winn(e.getMessage());
 						}
 
 					});
@@ -119,9 +115,8 @@ public class Controller extends Thread
 		return model;
 	}
 
-	public void passDummy(Dummy dummyIn)
+	public void passDummy(final Dummy dummy)
 	{
-		this.dummy = dummyIn;
 		EventQueue.invokeLater(new Runnable()
 		{
 			@Override
@@ -133,7 +128,7 @@ public class Controller extends Thread
 				} catch (ExitException e)
 				{
 					// TODO Auto-generated catch block
-					System.out.println("Zamkniêcie");
+					//System.out.println("Zamkniêcie");
 					System.exit(0);
 				}
 

@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.concurrent.BlockingQueue;
 
-import arkaoid.model.strategy.StartMoveStrategy;
 import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.PlayAction;
 import arkaoid.view.action.StartAction;

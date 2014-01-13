@@ -1,8 +1,8 @@
 package arkaoid.model.strategy;
 
-import arkaoid.GameOverException;
+import arkaoid.Exceptons.GameOverException;
+import arkaoid.Exceptons.NoBricksException;
 import arkaoid.model.Model;
-import arkaoid.model.NoBricksException;
 
 public abstract class AbstractStrategy
 {

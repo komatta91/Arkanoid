@@ -1,7 +1,9 @@
 package arkaoid.model;
 
 import arkaoid.ArkanoidStatic;
-import arkaoid.GameOverException;
+import arkaoid.Exceptons.FailException;
+import arkaoid.Exceptons.GameOverException;
+import arkaoid.Exceptons.NoBricksException;
 import arkaoid.controller.Controller;
 import arkaoid.model.strategy.ExitStrategy;
 import arkaoid.model.strategy.MouseMoveStrategy;
@@ -47,7 +49,7 @@ public class Model extends Thread
 		this.controller = controller;
 	}
 
-	public void doStrategy(NewGameStrategy s)
+	public void doStrategy(NewGameStrategy s) throws NoBricksException
 	{
 		//System.out.println("New Game");
 		gamePause = false;
@@ -112,7 +114,8 @@ public class Model extends Thread
 				//System.out.println(life-1);
 				if (ball.isMoving() && --life == 0)
 				{
-					throw new GameOverException();
+					//GameOverException ex = 
+					throw new GameOverException("Przegra³eœ!! \n Twój wynik to: " + bricks.getScore());
 				}
 				ball.stopMoving();
 				ball.setPoint(palette.getPalette());

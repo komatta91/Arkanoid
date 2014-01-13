@@ -3,6 +3,7 @@ package arkaoid.model;
 import java.awt.Point;
 
 import arkaoid.ArkanoidStatic;
+import arkaoid.Exceptons.FailException;
 
 public class Ball
 {
@@ -35,7 +36,6 @@ public class Ball
 //		if (dx == 0 || dy == 0)
 //			reRandom();
 		// /Test
-		int n = 0;
 		if (random < 0.16)
 		{
 			dy = -1;

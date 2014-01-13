@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import arkaoid.ArkanoidStatic;
+import arkaoid.Exceptons.NoBricksException;
 
 public class Bricks
 {
@@ -16,17 +17,19 @@ public class Bricks
 	{
 		for (Brick b : bricks)
 		{
+			boolean find = false;
 			if (b.isHit(point, radius))
 			{
-				boolean find = false;
 				b.decreasLife();
 				switch (b.getLife())
 				{
 				case 2:
 					setScore(getScore() + 30);
+					find = true;
 					break;
 				case 1:
 					setScore(getScore() + 20);
+					find = true;
 					break;
 				case 0:
 					setScore(getScore() + 10);
@@ -34,10 +37,7 @@ public class Bricks
 					find = true;
 					break;
 				}
-				if (find)
-				{
-					break;
-				}
+				
 				// default: setScore(getScore() + 00); break;
 
 				/*
@@ -47,6 +47,10 @@ public class Bricks
 				 * bricks.remove(b); break; }
 				 */
 				// return true;
+			}
+			if (find)
+			{
+				break;
 			}
 		}
 		int count = 0;
@@ -62,7 +66,7 @@ public class Bricks
 		if (0 == count)
 		{
 			// System.out.println("NoBrickException");
-			throw new NoBricksException();
+			throw new NoBricksException("Wygra³eœ!!\nTwój wynik to: " + getScore());
 		}
 		// return false;
 	}
@@ -79,11 +83,26 @@ public class Bricks
 		return false;
 	}
 
-	public void make()
+	public void make() throws NoBricksException
 	{
 		int a = ArkanoidStatic.BRICK_NUMBER;
 		a += Math.random() * ArkanoidStatic.BRICK_NUMBER;
 		bricks = maker.make(a);
+		int count = 0;
+		for (Brick b : bricks)
+		{
+			if (b.getLife() >= 0)
+			{
+				++count;
+			}
+		}
+		// System.out.println("NoBrickException");
+		// System.out.println(count);
+		if (0 == count)
+		{
+			// System.out.println("NoBrickException");
+			throw new NoBricksException("Wygra³eœ!!\nTwój wynik to: " + getScore());
+		}
 	}
 
 	/*

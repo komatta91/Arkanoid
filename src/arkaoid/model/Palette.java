@@ -5,7 +5,6 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
-import arkaoid.Arkanoid;
 import arkaoid.ArkanoidStatic;
 
 public class Palette

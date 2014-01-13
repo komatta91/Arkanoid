@@ -7,8 +7,7 @@ import java.util.concurrent.BlockingQueue;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import arkaoid.ArkanoidStatic;
-import arkaoid.ExitException;
+import arkaoid.Exceptons.ExitException;
 import arkaoid.model.Dummy;
 import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.TimerAction;
@@ -114,14 +113,14 @@ public class View extends Thread
 		}
 
 	}
-	public void winn()
+	public void winn(String s)
 	{
-		JOptionPane.showMessageDialog(null, "Wygra³eœ.");
+		JOptionPane.showMessageDialog(null, s);
 	}
 	
-	public void loos()
+	public void loos(String s)
 	{
-		JOptionPane.showMessageDialog(null, "Przegra³eœ.");
+		JOptionPane.showMessageDialog(null, s);
 	}
 
 }
