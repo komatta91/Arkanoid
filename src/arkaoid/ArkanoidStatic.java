@@ -12,4 +12,5 @@ public final class ArkanoidStatic
 	public static final Dimension BRICK_DIMENSION = new Dimension(60, 20);
 	public static final int BRICK_NUMBER = 40;
 	public static final int LIFE_NUMBER = 3;
+	public static final boolean ARE_INDESTRUCTIBLE = true;
 }

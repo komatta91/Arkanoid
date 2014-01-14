@@ -54,6 +54,7 @@ public class BrickMaker
 		//System.out.println(points.size());
 	}
 
+	@SuppressWarnings("unused")
 	private Brick makeBrick(long i)
 	{
 		int life = 1;
@@ -72,7 +73,7 @@ public class BrickMaker
 		}
 		//System.out.println("Numer Klocka: " + i);
 		points.remove(--i);
-		if (Math.random() > 0.9)
+		if (ArkanoidStatic.ARE_INDESTRUCTIBLE && Math.random() > 0.9)
 		{
 			return new IndestructibleBrock(p);
 		} else
