@@ -12,15 +12,14 @@ public class LayoutMenuMenager implements LayoutManager
 {
 	private int buttonHeight = 50;
 	/** Domyœlna szerokoœæ przycisku stanowi¹ca 75% szerokoœci okna */
-	private int buttonWidth = (int)(ArkanoidStatic.MENU_DIMENSION.getWidth() * 3 / 4);
-	private int gap = buttonHeight * 1 / 2;
+	private int buttonWidth = (ArkanoidStatic.MENU_DIMENSION.width * 3 / 4);
+	private int gap = buttonHeight / 2;
 	private int imageBottom = 0;
 	private boolean sizesSet = false;
 
 	@Override
 	public void addLayoutComponent(String name, Component comp)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
@@ -28,20 +27,15 @@ public class LayoutMenuMenager implements LayoutManager
 	public void layoutContainer(Container parent)
 	{
 		if (!sizesSet)
+		{
 			setSizes(parent);
-		// TODO Auto-generated method stub
+		}
 		int n = parent.getComponentCount();
 		int x = parent.getWidth() / 2 - buttonWidth / 2;
 		int y = imageBottom - buttonHeight;
-
-		// System.out.println(imageBottom);
-
 		for (int i = 0; i < n; ++i)
 		{
-			// System.out.println(y);
 			y += gap + buttonHeight;
-			// System.out.println(DEFAULT_BUTTON_WIDTH );
-			// System.out.println(y);
 			Component c = parent.getComponent(i);
 			c.setBounds(x, y, buttonWidth, buttonHeight);
 		}
@@ -50,18 +44,20 @@ public class LayoutMenuMenager implements LayoutManager
 	@Override
 	public Dimension minimumLayoutSize(Container parent)
 	{
-		// TODO Auto-generated method stub
 		if (!sizesSet)
+		{
 			setSizes(parent);
+		}
 		return preferredLayoutSize(parent);
 	}
 
 	@Override
 	public Dimension preferredLayoutSize(Container parent)
 	{
-		// TODO Auto-generated method stub
 		if (!sizesSet)
+		{
 			setSizes(parent);
+		}
 		Insets insets = parent.getInsets();
 		int width = buttonWidth + insets.left + insets.right;
 		int height = buttonHeight + insets.top + insets.top;
@@ -71,7 +67,7 @@ public class LayoutMenuMenager implements LayoutManager
 	@Override
 	public void removeLayoutComponent(Component comp)
 	{
-		// TODO Auto-generated method stub
+
 	}
 
 	public void setImageBottom(int imageBottom)
@@ -91,8 +87,5 @@ public class LayoutMenuMenager implements LayoutManager
 		buttonHeight = h;
 		this.gap = gap;
 		sizesSet = true;
-
-		// System.out.println(buttonHeight);
-		// System.out.println(this.gap);
 	}
 }

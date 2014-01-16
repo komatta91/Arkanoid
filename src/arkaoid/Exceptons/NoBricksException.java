@@ -1,6 +1,5 @@
 package arkaoid.Exceptons;
 
-
 @SuppressWarnings("serial")
 public class NoBricksException extends GameException
 {
@@ -8,7 +7,7 @@ public class NoBricksException extends GameException
 	{
 		super();
 	}
-	
+
 	public NoBricksException(String message)
 	{
 		super(message);

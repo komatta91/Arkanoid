@@ -27,20 +27,16 @@ public class MainMenuButtonPanel extends JPanel
 
 	private List<JButton> przyciski = new LinkedList<JButton>();
 	private BufferedImage image;
-	private int imageX = 0; // (MainMenu.DEFAULT_WIDTH - image.getWidth()) / 2;
+	private int imageX = 0;
 	private int imageY = 10;
-
-	// Point p;
 
 	public MainMenuButtonPanel(final BlockingQueue<AbstractGameAction> bq)
 	{
 		imageInit();
 		initLayoutMenager();
 		setBackground(Color.WHITE);
-		//
 		addButton("Nowa Gra").addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -77,11 +73,11 @@ public class MainMenuButtonPanel extends JPanel
 		try
 		{
 			image = ImageIO.read(imageFile);
-			imageX = (int)((ArkanoidStatic.MENU_DIMENSION.getWidth() - image.getWidth()) / 2);
+			imageX = (int) ((ArkanoidStatic.MENU_DIMENSION.getWidth() - image
+					.getWidth()) / 2);
 		} catch (IOException e)
 		{
 			System.err.println("Blad odczytu obrazka");
-			e.printStackTrace();
 		}
 	}
 

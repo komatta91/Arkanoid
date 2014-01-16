@@ -6,5 +6,6 @@ import arkaoid.model.Model;
 
 public abstract class AbstractStrategy
 {
-	public abstract void doStrategy(Model model) throws GameOverException, NoBricksException;
+	public abstract void doStrategy(Model model) throws GameOverException,
+			NoBricksException;
 }

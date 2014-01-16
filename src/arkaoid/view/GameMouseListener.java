@@ -20,10 +20,12 @@ import arkaoid.view.action.PlayAction;
 
 public class GameMouseListener implements MouseListener, MouseMotionListener
 {
-	final BlockingQueue<AbstractGameAction> bq;
-	private Robot robot;
-	private Point centerPoint = new Point(ArkanoidStatic.GAME_PANEL_DIMENSION.width/2,ArkanoidStatic.GAME_PANEL_DIMENSION.height/2);
-	
+	private final BlockingQueue<AbstractGameAction> bq;
+	private final Robot robot;
+	private final Point centerPoint = new Point(
+			ArkanoidStatic.GAME_PANEL_DIMENSION.width / 2,
+			ArkanoidStatic.GAME_PANEL_DIMENSION.height / 2);
+
 	public GameMouseListener(final BlockingQueue<AbstractGameAction> bq)
 	{
 		this.bq = bq;
@@ -32,27 +34,22 @@ public class GameMouseListener implements MouseListener, MouseMotionListener
 			robot = new Robot();
 		} catch (AWTException e1)
 		{
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			throw new RuntimeException();
 		}
-		
+
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
 		Point point = e.getPoint();
-		
-		
 		Point p = null;
 		if (e.getComponent().isVisible())
 		{
@@ -60,65 +57,57 @@ public class GameMouseListener implements MouseListener, MouseMotionListener
 		}
 		if (p != null)
 		{
-			p.x+=centerPoint.x;
-			p.y+=centerPoint.y;
-			robot.mouseMove(p.x, p.y);
-			if (point.x > centerPoint.x)
-			{
-				//System.out.println("W lewo");
-				bq.add(new MouseMoveLeftAction(point.x - centerPoint.x));
-				///TODO Zmieniæ przemieszczanie paletki na dyskretne w lewo w prawo;
-			} else
-			if (point.x < centerPoint.x) 
-			{
-				//System.out.println("W Prawo");
-				bq.add(new MouseMoveRightAction(point.x - centerPoint.x));
-			}
+			addAction(point, p);
 		}
-		
-		//bq.add(new MouseMoveAction(point));
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
 		bq.add(new PlayAction());
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-		//System.out.println("Wszed³em");
 		int[] pixels = new int[16 * 16];
-	    Image image = Toolkit.getDefaultToolkit().createImage(
-	        new MemoryImageSource(16, 16, pixels, 0, 16));
-	    Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
-	        image, new Point(0, 0), "invisibleCursor");
+		Image image = Toolkit.getDefaultToolkit().createImage(
+				new MemoryImageSource(16, 16, pixels, 0, 16));
+		Cursor transparentCursor = Toolkit.getDefaultToolkit()
+				.createCustomCursor(image, new Point(0, 0), "invisibleCursor");
 		e.getComponent().setCursor(transparentCursor);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-		//System.out.println("Wyszed³em");
 		e.getComponent().setCursor(Cursor.getDefaultCursor());
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-		
+
+	}
+
+	private void addAction(Point eventPoint, Point windowPoint)
+	{
+		windowPoint.x += centerPoint.x;
+		windowPoint.y += centerPoint.y;
+		robot.mouseMove(windowPoint.x, windowPoint.y);
+		if (eventPoint.x > centerPoint.x)
+		{
+			bq.add(new MouseMoveLeftAction(eventPoint.x - centerPoint.x));
+		} else if (eventPoint.x < centerPoint.x)
+		{
+			bq.add(new MouseMoveRightAction(eventPoint.x - centerPoint.x));
+		}
 	}
 
 }

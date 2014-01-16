@@ -13,28 +13,15 @@ import arkaoid.view.action.ExitButtonAction;
 @SuppressWarnings("serial")
 public class MainMenu extends JFrame
 {
-	/** Wysokoœæ okna */
-	//public static final int DEFAULT_HEIGHT = 400;
-	/** Szerokoœæ okna */
-	//public static final int DEFAULT_WIDTH = 300;
-
-	/** Komponent zawieraj¹cy przyciski */
 	private MainMenuButtonPanel buttonPanel;
 
-	// private BlockingQueue<AbstractGameAction> bq;
-
-	/** Konstruktor okna MainFrame */
 	public MainMenu(final BlockingQueue<AbstractGameAction> bq)
 	{
 		buttonPanel = new MainMenuButtonPanel(bq);
-		
-		
 		add(buttonPanel);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setTitle("Arkanoid- menu");
-		this.
-		setSize(ArkanoidStatic.MENU_DIMENSION);
-		//validate();
+		this.setSize(ArkanoidStatic.MENU_DIMENSION);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		addWindowListener(new WindowAdapter()

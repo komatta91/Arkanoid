@@ -8,9 +8,9 @@ public class TimerStrategy extends AbstractStrategy
 {
 
 	@Override
-	public void doStrategy(Model model) throws GameOverException, NoBricksException
+	public void doStrategy(Model model) throws GameOverException,
+			NoBricksException
 	{
-		// TODO Auto-generated method stub
 		model.doStrategy(this);
 	}
 

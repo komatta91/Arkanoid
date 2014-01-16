@@ -9,7 +9,7 @@ public abstract class GameException extends IOException
 	{
 		super();
 	}
-	
+
 	public GameException(String message)
 	{
 		super(message);

@@ -12,9 +12,8 @@ import arkaoid.model.strategy.StartMoveStrategy;
 import arkaoid.model.strategy.StartStrategy;
 import arkaoid.model.strategy.TimerStrategy;
 
-public class Model extends Thread
+public class Model
 {
-	/** Obiekt kontrolera */
 	private Controller controller;
 	private Palette palette = new Palette();
 	private Ball ball = new Ball();
@@ -32,13 +31,6 @@ public class Model extends Thread
 		this.controller = controller;
 	}
 
-	@Override
-	public void run()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 	public Controller getController()
 	{
 		return controller;
@@ -51,12 +43,9 @@ public class Model extends Thread
 
 	public void doStrategy(NewGameStrategy s) throws NoBricksException
 	{
-		//System.out.println("New Game");
+
 		gamePause = false;
-		//bricks.
-		//System.out.println(bricks.count());
 		bricks.make();
-		//bricks.print();
 		gamePause = false;
 		ball.stopMoving();
 		ball.reRandom();
@@ -71,7 +60,6 @@ public class Model extends Thread
 
 	public void doStrategy(ExitStrategy s)
 	{
-		//System.out.println("Exit");
 		gamePause = true;
 		Dummy dummy = new Dummy();
 		dummy.setExit(true);
@@ -79,51 +67,40 @@ public class Model extends Thread
 		controller.passDummy(dummy);
 	}
 
-	public void doStrategy(TimerStrategy s) throws GameOverException, NoBricksException
+	public void doStrategy(TimerStrategy s) throws GameOverException,
+			NoBricksException
 	{
-		// System.out.println("Time");
-		//ball.reRandom();
 		Dummy dummy = new Dummy();
 		dummy.setGame(true);
 		dummy.setTimer(true);
 		dummy.setPalette(palette.getPalette());
-		
-		
-			if ((bricks.isHit(ball.getPoint(), ArkanoidStatic.BALL_RADIUS)))
-			{
-				//TODO Odbicie od klocka
-				ball.bounce(bricks);
-				bricks.hit(ball.getPoint(), ArkanoidStatic.BALL_RADIUS);
-				
-				
 
-				//ball.move();
-			}
-			if (palette.isHit(ball.getPoint(), ArkanoidStatic.BALL_RADIUS) && ball.isMoving())
+		if ((bricks.isHit(ball.getPoint(), ArkanoidStatic.BALL_RADIUS)))
+		{
+			ball.bounce(bricks);
+			bricks.hit(ball.getPoint(), ArkanoidStatic.BALL_RADIUS);
+		}
+		if (palette.isHit(ball.getPoint(), ArkanoidStatic.BALL_RADIUS)
+				&& ball.isMoving())
+		{
+			ball.bounce(palette);
+		}
+		try
+		{
+			ball.move();
+		} catch (FailException e)
+		{
+			if (ball.isMoving() && --life == 0)
 			{
-				//System.out.println("Paletka");
-				ball.bounce(palette);
+				throw new GameOverException("Przegra³eœ!! \n Twój wynik to: "
+						+ bricks.getScore());
 			}
-			try
-			{
-				ball.move();
-			} catch (FailException e)
-			{
-				// TODO Auto-generated catch block
-				//System.out.println("Skucha!!!");
-				//System.out.println(life-1);
-				if (ball.isMoving() && --life == 0)
-				{
-					//GameOverException ex = 
-					throw new GameOverException("Przegra³eœ!! \n Twój wynik to: " + bricks.getScore());
-				}
-				ball.stopMoving();
-				ball.setPoint(palette.getPalette());
-			}
+			ball.stopMoving();
+			ball.setPoint(palette.getPalette());
+		}
 		dummy.setBall(ball.getPoint());
-		
+
 		dummy.setPoints(bricks.getBricks());
-		//bricks.print();
 		dummy.setScore(bricks.getScore());
 		dummy.setLife(life);
 		controller.passDummy(dummy);
@@ -131,7 +108,6 @@ public class Model extends Thread
 
 	public void doStrategy(StartStrategy s)
 	{
-		//System.out.println("Start");
 		this.life = ArkanoidStatic.LIFE_NUMBER;
 		bricks.resetScore();
 		Dummy dummy = new Dummy();
@@ -139,10 +115,8 @@ public class Model extends Thread
 		controller.passDummy(dummy);
 	}
 
-
 	public void doStrategy(StartMoveStrategy s)
 	{
-		// System.out.println("MouseMove");
 		if (!ball.isMoving() && !gamePause)
 		{
 			ball.startMoving();
@@ -151,7 +125,6 @@ public class Model extends Thread
 
 	public void doStrategy(MouseMoveStrategy s)
 	{
-		// TODO Auto-generated method stub
 		if (!gamePause)
 		{
 			palette.move(s.getDx());

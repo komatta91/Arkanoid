@@ -18,12 +18,9 @@ import arkaoid.view.action.AbstractGameAction;
 @SuppressWarnings("serial")
 public class GameFramePanel extends JPanel
 {
-	// /public static final int DEFAULT_WIDTH = (int)(GameFrame.DEFAULT_WIDTH *
-	// 0.8);
-	// public static final int DEFAULT_HEIGHT = GameFrame.DEFAULT_HEIGHT;
 	private Point palette = new Point();
 	private Point ballCentre = new Point();
-	List<BrickMod> points;
+	private List<BrickMod> points;
 
 	public GameFramePanel(final BlockingQueue<AbstractGameAction> bq)
 	{
@@ -32,73 +29,95 @@ public class GameFramePanel extends JPanel
 		GameMouseListener ml = new GameMouseListener(bq);
 		addMouseMotionListener(ml);
 		addMouseListener(ml);
-		
 	}
 
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		Rectangle2D rec = new Rectangle2D.Double();
-		rec.setFrame(palette, ArkanoidStatic.PALETTE_DIMENSION);
-		g2.setColor(Color.BLACK);
-		g2.fill(rec);
-		g2.draw(rec);
-		
-		
-		Ellipse2D kolo = new Ellipse2D.Double(ballCentre.x, ballCentre.y, ArkanoidStatic.BALL_RADIUS, ArkanoidStatic.BALL_RADIUS);
-		g2.setColor(Color.YELLOW);
-		g2.fill(kolo);
-		g2.draw(kolo);
-		
-		//Rectangle2D rect = new Rectangle2D.Double();
-		//rect.setFrame(new Point(00,20), ArkanoidStatic.BRICK_DIMENSION);
-		//g2.fill(rect);
-		//g2.draw(rect);
+		paintPalette(g2);
+		paintBall(g2);
 		if (points != null)
-			
-			
-		for (BrickMod p : points)
 		{
-			Rectangle2D rect = new Rectangle2D.Double();
-			rect.setFrame(p.getPoint(), ArkanoidStatic.BRICK_DIMENSION);
-			Rectangle2D rectFrame = new Rectangle2D.Double();
-			rectFrame.setFrame(rect);
-			switch (p.getLife())
-			{
-				case 1: g2.setColor(Color.PINK); break;
-				case 2: g2.setColor(Color.MAGENTA); break;
-				case 3: g2.setColor(new Color(248,88,35)); break;
-				case -1: g2.setColor(Color.ORANGE); break;
-				//case 4: g2.setColor(Color.BLACK); break;
-				default: g2.setColor(Color.BLACK); break;
-			}
-			//g2.setColor(Color.MAGENTA);
-			g2.fill(rect);
-			g2.draw(rect);
-			g2.setColor(Color.BLACK);
-			g2.draw(rectFrame);
-			
+			paintBricks(g2);
 		}
-		
 	}
 
 	public void setPaleteCentre(Point paletteCentre)
 	{
 		int x = paletteCentre.x - ArkanoidStatic.PALETTE_DIMENSION.width / 2;
 		int y = paletteCentre.y;
-		this.palette = new Point(x,y);
-		
-		//paintComponent(getGraphics());
+		this.palette = new Point(x, y);
 	}
-	
+
 	public void setBallCentre(Point ballCentre)
 	{
 		this.ballCentre.setLocation(ballCentre.x, ballCentre.y);
 	}
-	
+
 	public void setPoints(List<BrickMod> points)
 	{
 		this.points = points;
+	}
+
+	private void paintBricks(Graphics2D g2)
+	{
+		for (BrickMod p : points)
+		{
+			paintBrick(g2, p);
+		}
+	}
+
+	private void paintBrick(Graphics2D g2, BrickMod brick)
+	{
+		Rectangle2D rect = new Rectangle2D.Double();
+		rect.setFrame(brick.getPoint(), ArkanoidStatic.BRICK_DIMENSION);
+		g2.setColor(checkColor(brick.getLife()));
+		g2.fill(rect);
+		g2.draw(rect);
+		paintBrickFrame(g2, rect);
+	}
+
+	private void paintBrickFrame(Graphics2D g2, Rectangle2D rectangle)
+	{
+		Rectangle2D rectFrame = new Rectangle2D.Double();
+		rectFrame.setFrame(rectangle);
+		g2.setColor(Color.BLACK);
+		g2.draw(rectFrame);
+	}
+
+	private Color checkColor(int life)
+	{
+		switch (life)
+		{
+		case 1:
+			return Color.PINK;
+		case 2:
+			return Color.MAGENTA;
+		case 3:
+			return new Color(248, 88, 35);
+		case -1:
+			return Color.ORANGE;
+		default:
+			return Color.BLACK;
+		}
+	}
+
+	private void paintBall(Graphics2D g2)
+	{
+		Ellipse2D kolo = new Ellipse2D.Double(ballCentre.x, ballCentre.y,
+				ArkanoidStatic.BALL_RADIUS, ArkanoidStatic.BALL_RADIUS);
+		g2.setColor(Color.YELLOW);
+		g2.fill(kolo);
+		g2.draw(kolo);
+	}
+
+	private void paintPalette(Graphics2D g2)
+	{
+		Rectangle2D rec = new Rectangle2D.Double();
+		rec.setFrame(palette, ArkanoidStatic.PALETTE_DIMENSION);
+		g2.setColor(Color.BLACK);
+		g2.fill(rec);
+		g2.draw(rec);
 	}
 }

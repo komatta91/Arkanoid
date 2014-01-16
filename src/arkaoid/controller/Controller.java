@@ -30,13 +30,13 @@ import arkaoid.view.action.TimerAction;
 
 public class Controller extends Thread
 {
-	/** Obiekt model */
 	private final Model model;
 	private final View view;
 	private final BlockingQueue<AbstractGameAction> bq;
 	private final Map<AbstractGameAction, AbstractStrategy> map = new HashMap<AbstractGameAction, AbstractStrategy>();
 
-	public Controller(BlockingQueue<AbstractGameAction> bq, Model model, View view)
+	public Controller(BlockingQueue<AbstractGameAction> bq, Model model,
+			View view)
 	{
 		this.model = model;
 		this.view = view;
@@ -54,22 +54,19 @@ public class Controller extends Thread
 
 			try
 			{
-				// System.out.println("Take");
 				AbstractGameAction action = bq.take();
 				AbstractStrategy s = map.get(action);
-				
+
 				if (s instanceof MouseMoveStrategy)
 				{
-					((MouseMoveStrategy) s).setDx(((MouseMoveAction) action).getDx());
+					((MouseMoveStrategy) s).setDx(((MouseMoveAction) action)
+							.getDx());
 				}
-				//e.printStackTrace();
 				try
 				{
 					s.doStrategy(model);
 				} catch (final GameOverException e)
 				{
-					// TODO Auto-generated catch block
-					//System.out.println("Przegra³eœ!!!");
 					EventQueue.invokeLater(new Runnable()
 					{
 						@Override
@@ -80,11 +77,9 @@ public class Controller extends Thread
 
 					});
 					new StartStrategy().doStrategy(model);
-					
+
 				} catch (final NoBricksException e)
 				{
-					// TODO Auto-generated catch block
-					//System.out.println("Wygra³eœ!!!");
 					EventQueue.invokeLater(new Runnable()
 					{
 						@Override
@@ -96,14 +91,9 @@ public class Controller extends Thread
 					});
 					new StartStrategy().doStrategy(model);
 				}
-				
-				
-				
-				// if (action.toString() == "Zakoñcz")
-				// break;
+
 			} catch (InterruptedException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -127,8 +117,6 @@ public class Controller extends Thread
 					view.checkDummy(dummy);
 				} catch (ExitException e)
 				{
-					// TODO Auto-generated catch block
-					//System.out.println("Zamkniêcie");
 					System.exit(0);
 				}
 
@@ -143,7 +131,6 @@ public class Controller extends Thread
 		map.put(new ExitButtonAction(), new ExitStrategy());
 		map.put(new TimerAction(), new TimerStrategy());
 		map.put(new StartAction(), new StartStrategy());
-		//map.put(new MouseMoveAction(), new MouseMoveStrategy());
 		map.put(new PlayAction(), new StartMoveStrategy());
 		map.put(new MouseMoveLeftAction(), new MouseMoveStrategy());
 		map.put(new MouseMoveRightAction(), new MouseMoveStrategy());

@@ -13,16 +13,12 @@ public class Arkanoid
 
 	public static void main(String[] args)
 	{
-		// TODO Auto-generated method stub
-		
-		
-		
 		final BlockingQueue<AbstractGameAction> bq = new LinkedBlockingQueue<AbstractGameAction>();
 		Model model = new Model();
 		View widok = new View(bq);
-		Controller kontroler = new Controller(bq, model, widok);
-		model.setController(kontroler);
-		kontroler.start();
+		Controller controler = new Controller(bq, model, widok);
+		model.setController(controler);
+		controler.start();
 
 	}
 
