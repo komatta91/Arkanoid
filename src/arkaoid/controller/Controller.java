@@ -28,11 +28,18 @@ import arkaoid.view.action.PlayAction;
 import arkaoid.view.action.StartAction;
 import arkaoid.view.action.TimerAction;
 
+/**
+ * Klasa kontrolera. Odpowiedzialna za komunikacjê pomiêdzy widokiem i modelem.
+ * @author Karol
+ *
+ */
 public class Controller extends Thread
 {
 	private final Model model;
 	private final View view;
+	///Kolejka blokuj¹ca przekazuj¹ca akcje które wyst¹pi³y w widoku.
 	private final BlockingQueue<AbstractGameAction> bq;
+	///Mapa akcji i odpowiadaj¹cych i strategii.
 	private final Map<AbstractGameAction, AbstractStrategy> map = new HashMap<AbstractGameAction, AbstractStrategy>();
 
 	public Controller(BlockingQueue<AbstractGameAction> bq, Model model,
@@ -44,6 +51,11 @@ public class Controller extends Thread
 		makeActionStrategy();
 	}
 
+	/**
+	 * G³ówna pêtla programu. Odpowiedzialna za pobranie kolejnych
+	 * zdarzeñ z widoku. Rozpoznanie ich i wykonanie
+	 * odpowiadaj¹cych im strategii.
+	 */
 	@Override
 	public void run()
 	{
@@ -56,7 +68,7 @@ public class Controller extends Thread
 			{
 				AbstractGameAction action = bq.take();
 				AbstractStrategy s = map.get(action);
-
+				///Przekazanie prametru przesuniêcia z akcji do strategii.
 				if (s instanceof MouseMoveStrategy)
 				{
 					((MouseMoveStrategy) s).setDx(((MouseMoveAction) action)
@@ -69,10 +81,11 @@ public class Controller extends Thread
 				{
 					EventQueue.invokeLater(new Runnable()
 					{
+						///Nast¹pi³ wyj¹tek przegranej.
 						@Override
 						public void run()
 						{
-							view.loos(e.getMessage());
+							view.showMessage(e.getMessage());
 						}
 
 					});
@@ -80,12 +93,13 @@ public class Controller extends Thread
 
 				} catch (final NoBricksException e)
 				{
+					///Nast¹pi³ wyj¹tek zwyciêstwa.
 					EventQueue.invokeLater(new Runnable()
 					{
 						@Override
 						public void run()
 						{
-							view.winn(e.getMessage());
+							view.showMessage(e.getMessage());
 						}
 
 					});
@@ -104,7 +118,11 @@ public class Controller extends Thread
 	{
 		return model;
 	}
-
+	
+	/**
+	 * Metoda przekazuj¹ca makiete do widoku.
+	 * @param dummy makieta pochodz¹ca z modelu.
+	 */
 	public void passDummy(final Dummy dummy)
 	{
 		EventQueue.invokeLater(new Runnable()
@@ -125,6 +143,10 @@ public class Controller extends Thread
 		});
 	}
 
+	/**
+	 * Medtoda odpowiedzialna za utworzenie mapy akcji i odpowiadaj¹cym
+	 * im strategii.
+	 */
 	private void makeActionStrategy()
 	{
 		map.put(new NewGameButtonAction(), new NewGameStrategy());

@@ -12,11 +12,28 @@ import arkaoid.model.Dummy;
 import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.TimerAction;
 
+/**
+ * klasa reprezentuj¹ca widok
+ * @author Karol
+ *
+ */
 public class View
 {
+	/**
+	 * Menu g³ówne
+	 */
 	private MainMenu mainMenu;
+	/**
+	 * okno gry
+	 */
 	private GameFrame gameFrame;
+	/**
+	 * kolejka blokuj¹ca
+	 */
 	private final BlockingQueue<AbstractGameAction> bq;
+	/**
+	 * zegar
+	 */
 	private Timer timer;
 
 	public View(BlockingQueue<AbstractGameAction> bq)
@@ -29,7 +46,21 @@ public class View
 	{
 		return bq;
 	}
+	
+	/**
+	 * metoda pokazuj¹ca komunikat
+	 * @param s komunikat
+	 */	
+	public void showMessage(String s)
+	{
+		JOptionPane.showMessageDialog(null, s);
+	}
 
+	/**
+	 * metoda rozpoznaj¹ca makiete
+	 * @param dummy makieta
+	 * @throws ExitException wyj¹tek wyjœcia z aplikacji
+	 */
 	public void checkDummy(Dummy dummy) throws ExitException
 	{
 		mainMenu.setVisible(dummy.isMenu());
@@ -62,6 +93,9 @@ public class View
 		}
 	}
 
+	/**
+	 * metoda inicjalizuj¹ca komponenty
+	 */
 	private void initComponents()
 	{
 		mainMenu = new MainMenu(bq);
@@ -78,6 +112,10 @@ public class View
 		return;
 	}
 
+	/**
+	 * metoda pokazuj¹za komunikat z zapytaniem o zamkniêcie.
+	 * @throws ExitException wyj¹tek zamkniêcia palikacji
+	 */
 	private void closing() throws ExitException
 	{
 		Object[] options = { "Tak", "Nie" };
@@ -94,14 +132,6 @@ public class View
 		}
 	}
 
-	public void winn(String s)
-	{
-		JOptionPane.showMessageDialog(null, s);
-	}
-
-	public void loos(String s)
-	{
-		JOptionPane.showMessageDialog(null, s);
-	}
+	
 
 }

@@ -2,9 +2,20 @@ package arkaoid.model;
 
 import java.awt.Point;
 
+/**
+ * Klaca reprezentuj¹ca makietê klocka.
+ * @author Karol
+ *
+ */
 public class BrickMod
 {
+	/**
+	 * iloœæ ¿yæ klocka
+	 */
 	private int life;
+	/**
+	 * punkt w którym zaczepiony jest klocek.
+	 */
 	private Point point;
 
 	public BrickMod(int life, Point point)

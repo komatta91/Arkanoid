@@ -8,10 +8,21 @@ import javax.swing.JPanel;
 
 import arkaoid.ArkanoidStatic;
 
+/**
+ * klasa reprezentuj¹ca panel punktów
+ * @author Karol
+ *
+ */
 @SuppressWarnings("serial")
 public class ScoreGamePanel extends JPanel
 {
+	/**
+	 * ¿ycie gracza
+	 */
 	private int life;
+	/**
+	 * liczba punktów zdobyta przez gracza
+	 */
 	private int score;
 
 	public ScoreGamePanel()
@@ -20,6 +31,9 @@ public class ScoreGamePanel extends JPanel
 		setBackground(Color.LIGHT_GRAY);
 	}
 
+	/**
+	 * metoda rysuj¹ca panel
+	 */
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);

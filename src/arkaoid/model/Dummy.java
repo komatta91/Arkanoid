@@ -3,16 +3,48 @@ package arkaoid.model;
 import java.awt.Point;
 import java.util.List;
 
+/**
+ * klasa reprezêtuj¹ca makietê modelu.
+ * @author Karol
+ *
+ */
 public class Dummy
 {
+	/**
+	 * czy ma byæ pokazane menu
+	 */
 	private boolean menu = false;
+	/**
+	 * czy ma byæ pokazane zapytanie o zamkniêcie.
+	 */
 	private boolean exit = false;
+	/**
+	 * czy zegar ma byæ w³¹czony
+	 */
 	private boolean timer = false;
+	/**
+	 * czy ma byæ pokazane okno gry
+	 */
 	private boolean game = false;
+	/**
+	 * punkt ppeprezentuj¹cy paletkê
+	 */
 	private Point palette = null;
+	/**
+	 * punkt reprezentuj¹cy pi³kê
+	 */
 	private Point ball = null;
+	/**
+	 * makieta klocków
+	 */
 	private List<BrickMod> points;
+	/**
+	 * iloœæ ¿yæ gracza
+	 */
 	private int life;
+	/**
+	 * wynik gracza
+	 */
 	private int score;
 
 	public boolean isMenu()

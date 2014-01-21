@@ -15,11 +15,25 @@ import arkaoid.ArkanoidStatic;
 import arkaoid.model.BrickMod;
 import arkaoid.view.action.AbstractGameAction;
 
+/**
+ * Klasa reprezêtuj¹ca panel w którym rozgrywa siê gra.
+ * @author Karol
+ *
+ */
 @SuppressWarnings("serial")
 public class GameFramePanel extends JPanel
 {
+	/**
+	 * lewy górny róg paletki
+	 */
 	private Point palette = new Point();
+	/**
+	 * œrodek pi³ki
+	 */
 	private Point ballCentre = new Point();
+	/**
+	 * kolekcja lewych górnych rógów klocków
+	 */
 	private List<BrickMod> points;
 
 	public GameFramePanel(final BlockingQueue<AbstractGameAction> bq)
@@ -31,6 +45,9 @@ public class GameFramePanel extends JPanel
 		addMouseListener(ml);
 	}
 
+	/**
+	 * metoda odpowiedzialna za rysowanie zawartoœci
+	 */
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -60,6 +77,10 @@ public class GameFramePanel extends JPanel
 		this.points = points;
 	}
 
+	/**
+	 * metoda odpowiedzialna za rysowanie klocków
+	 * @param g2 
+	 */
 	private void paintBricks(Graphics2D g2)
 	{
 		for (BrickMod p : points)
@@ -68,6 +89,11 @@ public class GameFramePanel extends JPanel
 		}
 	}
 
+	/**
+	 * metoda odpowiedzialna za rysowanie klocka
+	 * @param g2
+	 * @param brick klocek
+	 */
 	private void paintBrick(Graphics2D g2, BrickMod brick)
 	{
 		Rectangle2D rect = new Rectangle2D.Double();
@@ -78,6 +104,11 @@ public class GameFramePanel extends JPanel
 		paintBrickFrame(g2, rect);
 	}
 
+	/**
+	 * metoda odpowiedziala za rysowanie obramowania klocka
+	 * @param g2
+	 * @param rectangle kszta³t klocka
+	 */
 	private void paintBrickFrame(Graphics2D g2, Rectangle2D rectangle)
 	{
 		Rectangle2D rectFrame = new Rectangle2D.Double();
@@ -86,6 +117,11 @@ public class GameFramePanel extends JPanel
 		g2.draw(rectFrame);
 	}
 
+	/**
+	 * metoda wybieraj¹ca kolor t³a klocka na podstawie jego punktów ¿ycia.
+	 * @param life
+	 * @return
+	 */
 	private Color checkColor(int life)
 	{
 		switch (life)
@@ -103,6 +139,10 @@ public class GameFramePanel extends JPanel
 		}
 	}
 
+	/**
+	 * metoda odpowiedzialna za rysowanie pi³ki
+	 * @param g2
+	 */
 	private void paintBall(Graphics2D g2)
 	{
 		Ellipse2D kolo = new Ellipse2D.Double(ballCentre.x, ballCentre.y,
@@ -112,6 +152,10 @@ public class GameFramePanel extends JPanel
 		g2.draw(kolo);
 	}
 
+	/**
+	 * metoda odpowiedzialna za rysowanie paletki
+	 * @param g2
+	 */
 	private void paintPalette(Graphics2D g2)
 	{
 		Rectangle2D rec = new Rectangle2D.Double();

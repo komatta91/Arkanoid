@@ -10,6 +10,11 @@ import arkaoid.ArkanoidStatic;
 import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.ExitButtonAction;
 
+/**
+ * klasa reprezentuj¹ca megu g³ówne gry
+ * @author Karol
+ *
+ */
 @SuppressWarnings("serial")
 public class MainMenu extends JFrame
 {

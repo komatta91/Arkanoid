@@ -8,11 +8,27 @@ import java.util.TreeMap;
 
 import arkaoid.ArkanoidStatic;
 
+/**
+ * Klasa odpowiedzialan za tworzenie klocków.
+ * @author Karol
+ *
+ */
 public class BrickMaker
 {
+	/**
+	 * mapa punktów w których mog¹ byæ zaczepione klocki.
+	 */
 	Map<Long, Point> points = new TreeMap<Long, Point>();
+	/**
+	 * liczba mo¿liwych do utworzenie klocków
+	 */
 	int count;
 
+	/**
+	 * metoda tworz¹ca listê klocków.
+	 * @param n liczba klocków mo¿liwych do utworzenia.
+	 * @return lista utworzonych klocków.
+	 */
 	public List<Brick> make(int n)
 	{
 		makePoints();
@@ -26,6 +42,10 @@ public class BrickMaker
 		return bricks;
 	}
 
+	/**
+	 * klasa tworz¹ca mapê punktów w których mog¹ byæ utworzone 
+	 * klocki na podstawie wielkoœci klocków i ramki gry.
+	 */
 	private void makePoints()
 	{
 		int count = 1;
@@ -50,6 +70,12 @@ public class BrickMaker
 		this.count = points.size();
 	}
 
+	/**
+	 * metoda tworz¹ca klocek i dodaj¹ca go do kolekcji.
+	 * @param i indeks punktu w mapie w którym ma byæ zaczepiony klocek o ile jest to mo¿liwe.
+	 * 
+	 * @return klocek zniszczalny lub niezniszczalny.
+	 */
 	private Brick makeBrick(long i)
 	{
 		if (ArkanoidStatic.ARE_INDESTRUCTIBLE && Math.random() > 0.9)
@@ -60,7 +86,13 @@ public class BrickMaker
 			return new DestructibleBrick(getLife(), getPoint(i));
 		}
 	}
-
+	
+	/**
+	 * petoda zwracaj¹ca punkt z mapy dostêpnych lub jeœli to niemo¿liwe wyszukuje kolejny
+	 * wolny punkt usuwa fo z poœród dostêpnych i zwraca go.
+	 * @param i indeks punktu do pobrania o ile jest to mo¿liwe.
+	 * @return punkt dostêpny w mapie.
+	 */
 	private Point getPoint(long i)
 	{
 		Point p = points.get(i++);
@@ -75,7 +107,11 @@ public class BrickMaker
 		points.remove(--i);
 		return p;
 	}
-
+	
+	/**
+	 * metoda losuj¹ca iloœæ ¿yæ klocka.
+	 * @return
+	 */
 	private int getLife()
 	{
 		int life = 1;

@@ -21,15 +21,34 @@ import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.ExitButtonAction;
 import arkaoid.view.action.NewGameButtonAction;
 
+/**
+ * klasa reprezentuj¹ca panel menu g³ównego
+ * @author Karol
+ *
+ */
 @SuppressWarnings("serial")
 public class MainMenuButtonPanel extends JPanel
 {
 
+	/**
+	 * kolekcja przycisków
+	 */
 	private List<JButton> przyciski = new LinkedList<JButton>();
+	/**
+	 * obraz z manu
+	 */
 	private BufferedImage image;
+	/**
+	 * po³o¿enie obrazka
+	 */
 	private int imageX = 0;
 	private int imageY = 10;
 
+	/**
+	 * konstruktor tworzy panel i przyciski które zawiera i dodaje
+	 * do nich s³uchaczy zdarzeñ
+	 * @param bq
+	 */
 	public MainMenuButtonPanel(final BlockingQueue<AbstractGameAction> bq)
 	{
 		imageInit();
@@ -59,7 +78,19 @@ public class MainMenuButtonPanel extends JPanel
 			add(b);
 		}
 	}
+	/**
+	 * metoda rysuj¹ca komponent
+	 */
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawImage(image, imageX, imageY, this);
+	}
 
+	/**
+	 * metoda inicjalizuje menagera rozk³adu
+	 */
 	private void initLayoutMenager()
 	{
 		LayoutMenuMenager mgr = new LayoutMenuMenager();
@@ -67,6 +98,9 @@ public class MainMenuButtonPanel extends JPanel
 		setLayout(mgr);
 	}
 
+	/**
+	 * metoda inicjalizuje obraz z menu gry
+	 */
 	private void imageInit()
 	{
 		File imageFile = new File("images/Arkanoid.jpg");
@@ -81,18 +115,21 @@ public class MainMenuButtonPanel extends JPanel
 		}
 	}
 
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(image, imageX, imageY, this);
-	}
-
-	public int getImageBottom()
+	
+	/**
+	 * metoda zwraca wysokoœæ na której znajduj siê obrazek
+	 * @return
+	 */
+	private int getImageBottom()
 	{
 		return image.getHeight() + imageY;
 	}
 
+	/**
+	 * metoda tworzy przycisk i dodaje go do kolekcji
+	 * @param name etykieta przycisku
+	 * @return utworzony przycisk
+	 */
 	private JButton addButton(String name)
 	{
 		JButton nowy = new JButton(name);

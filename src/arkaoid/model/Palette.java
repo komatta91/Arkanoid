@@ -7,8 +7,16 @@ import java.awt.geom.Rectangle2D;
 
 import arkaoid.ArkanoidStatic;
 
+/**
+ * klasa reprezentuj¹ca paletkê.
+ * @author Karol
+ *
+ */
 public class Palette
 {
+	/**
+	 * punkt œrodkowy górnej krawêdzi paletki.
+	 */
 	private Point point = new Point(
 			ArkanoidStatic.GAME_PANEL_DIMENSION.width / 2,
 			(int) (ArkanoidStatic.GAME_PANEL_DIMENSION.getHeight()
@@ -19,6 +27,11 @@ public class Palette
 		return (Point) point.clone();
 	}
 
+	/**
+	 * Metoda ustawiaj¹ca nowy punkt œrodkowy paletki o ile
+	 * poletka nie wypad³aby poza ramkê.
+	 * @param newPoint nowy punkt œrodkowy paletki do testów.
+	 */
 	public void setPoint(Point newPoint)
 	{
 		int ods = (int) ArkanoidStatic.PALETTE_DIMENSION.getWidth() / 2;
@@ -37,6 +50,12 @@ public class Palette
 
 	}
 
+	/**
+	 * metoda testuj¹ca czy nast¹pi³o zderzenie z ko³em
+	 * @param point œrodek ko³a
+	 * @param radius promieñ
+	 * @return czy jest zderzenie
+	 */
 	public boolean isHit(Point point, int radius)
 	{
 		Rectangle2D palette = new Rectangle2D.Double();
@@ -49,6 +68,11 @@ public class Palette
 		return area.intersects(palette);
 	}
 
+	/**
+	 * metoda poruszaj¹ca paletk¹ w p³aszczyŸnie poziomej
+	 * o ile nie wypadnie poza ramkê;
+	 * @param dx przemieszczenie
+	 */
 	public void move(int dx)
 	{
 		point.x -= dx;

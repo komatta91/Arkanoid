@@ -17,8 +17,14 @@ public class Model
 	private Controller controller;
 	private Palette palette = new Palette();
 	private Ball ball = new Ball();
+	/**
+	 * czy gra jest zatrzymana
+	 */
 	private boolean gamePause = true;
 	private Bricks bricks = new Bricks();
+	/**
+	 * liczba ¿yæ gracza
+	 */
 	private int life = ArkanoidStatic.LIFE_NUMBER;
 
 	public Model()
@@ -41,6 +47,16 @@ public class Model
 		this.controller = controller;
 	}
 
+	/**
+	 * Dalej wystêpuj¹ metody obs³uguj¹ce ró¿ne strategi niezbêdne
+	 * do dzia³ania aplikacji.
+	 */
+	
+	/**
+	 * metoda obs³uguj¹ca strategiê nowej gry
+	 * @param s strategia nowej gry
+	 * @throws NoBricksException
+	 */
 	public void doStrategy(NewGameStrategy s) throws NoBricksException
 	{
 
@@ -49,15 +65,19 @@ public class Model
 		gamePause = false;
 		ball.stopMoving();
 		ball.reRandom();
-		ball.setPoint(palette.getPalette());
+		ball.setPointFromPalette(palette.getPalette());
 		Dummy dummy = new Dummy();
 		dummy.setGame(true);
 		dummy.setTimer(true);
-		controller.passDummy(dummy);
 		this.life = ArkanoidStatic.LIFE_NUMBER;
 		bricks.resetScore();
+		controller.passDummy(dummy);
 	}
 
+	/**
+	 * metoda obs³uguj¹ca strategiê zamkniêcia gry.
+	 * @param s strategia zamkniêcia
+	 */
 	public void doStrategy(ExitStrategy s)
 	{
 		gamePause = true;
@@ -67,6 +87,12 @@ public class Model
 		controller.passDummy(dummy);
 	}
 
+	/**
+	 * metoda obs³uguj¹ca strategiê czasu
+	 * @param s strategia czasu
+	 * @throws GameOverException wyj¹tek przegranej
+	 * @throws NoBricksException wyj¹tek wygranej
+	 */
 	public void doStrategy(TimerStrategy s) throws GameOverException,
 			NoBricksException
 	{
@@ -96,7 +122,7 @@ public class Model
 						+ bricks.getScore());
 			}
 			ball.stopMoving();
-			ball.setPoint(palette.getPalette());
+			ball.setPointFromPalette(palette.getPalette());
 		}
 		dummy.setBall(ball.getPoint());
 
@@ -106,6 +132,10 @@ public class Model
 		controller.passDummy(dummy);
 	}
 
+	/**
+	 * metoda obs³uguj¹ca strategiê startu aplikacji
+	 * @param s
+	 */
 	public void doStrategy(StartStrategy s)
 	{
 		this.life = ArkanoidStatic.LIFE_NUMBER;
@@ -115,6 +145,10 @@ public class Model
 		controller.passDummy(dummy);
 	}
 
+	/**
+	 * metoda obs³uguj¹ca strategiê startu poruszania siê pi³ki
+	 * @param s
+	 */
 	public void doStrategy(StartMoveStrategy s)
 	{
 		if (!ball.isMoving() && !gamePause)
@@ -123,6 +157,10 @@ public class Model
 		}
 	}
 
+	/**
+	 * metoda obs³uguj¹ca strategiê poruszenia myszki
+	 * @param s
+	 */
 	public void doStrategy(MouseMoveStrategy s)
 	{
 		if (!gamePause)
@@ -130,7 +168,7 @@ public class Model
 			palette.move(s.getDx());
 			if (!ball.isMoving())
 			{
-				ball.setPoint(palette.getPalette());
+				ball.setPointFromPalette(palette.getPalette());
 			}
 		}
 	}

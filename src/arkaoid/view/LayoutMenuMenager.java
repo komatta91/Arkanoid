@@ -8,11 +8,21 @@ import java.awt.LayoutManager;
 
 import arkaoid.ArkanoidStatic;
 
+/**
+ * klasa implementuj¹ca menad¿era rozk³adu
+ * @author Karol
+ *
+ */
 public class LayoutMenuMenager implements LayoutManager
 {
 	private int buttonHeight = 50;
-	/** Domyœlna szerokoœæ przycisku stanowi¹ca 75% szerokoœci okna */
+	/**
+	 * Domyœlna szerokoœæ przycisku stanowi¹ca 75% szerokoœci okna
+	 */
 	private int buttonWidth = (ArkanoidStatic.MENU_DIMENSION.width * 3 / 4);
+	/**
+	 * domyœlna wielkoœæ luki pomiêdzy przyciskami 50% wysokoœci przycisku
+	 */
 	private int gap = buttonHeight / 2;
 	private int imageBottom = 0;
 	private boolean sizesSet = false;

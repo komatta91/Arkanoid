@@ -13,10 +13,21 @@ import arkaoid.model.BrickMod;
 import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.StartAction;
 
+/**
+ * Klasa reprezêtuj¹ca okno gry
+ * @author Karol
+ *
+ */
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame
 {
+	/**
+	 * panel gry
+	 */
 	private GameFramePanel gamePanel;
+	/**
+	 * panel punktów
+	 */
 	private ScoreGamePanel scorePanel = new ScoreGamePanel();
 
 	public GameFrame(final BlockingQueue<AbstractGameAction> bq)

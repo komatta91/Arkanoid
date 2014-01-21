@@ -2,6 +2,10 @@ package arkaoid;
 
 import java.awt.Dimension;
 
+/**
+ * Klasa przetrzymuj¹ca ogólne w³asnoœci dla ca³ej gry.
+ *
+ */
 public final class ArkanoidStatic
 {
 	public static final Dimension GAME_FRAME_DIMENSION = new Dimension(800, 600);

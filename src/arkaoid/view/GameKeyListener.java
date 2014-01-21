@@ -8,6 +8,11 @@ import arkaoid.view.action.AbstractGameAction;
 import arkaoid.view.action.PlayAction;
 import arkaoid.view.action.StartAction;
 
+/**
+ * klasa s³uchacza zdarzeñ klawiatury
+ * @author Karol
+ *
+ */
 public class GameKeyListener implements KeyListener
 {
 	private final BlockingQueue<AbstractGameAction> bq;
@@ -17,6 +22,9 @@ public class GameKeyListener implements KeyListener
 		this.bq = bq;
 	}
 
+	/**
+	 * metoda wstawia do kolejki blokuj¹cej odpowiednie akcje
+	 */
 	@Override
 	public void keyPressed(KeyEvent e)
 	{

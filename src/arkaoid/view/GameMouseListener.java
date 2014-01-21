@@ -18,10 +18,24 @@ import arkaoid.view.action.MouseMoveLeftAction;
 import arkaoid.view.action.MouseMoveRightAction;
 import arkaoid.view.action.PlayAction;
 
+/**
+ * Klasa obs³uguj¹ca gesty myszy.
+ * @author Karol
+ *
+ */
 public class GameMouseListener implements MouseListener, MouseMotionListener
 {
+	/**
+	 * kolejka blokuj¹ca
+	 */
 	private final BlockingQueue<AbstractGameAction> bq;
+	/**
+	 * robot
+	 */
 	private final Robot robot;
+	/**
+	 * œrodek paneku gry
+	 */
 	private final Point centerPoint = new Point(
 			ArkanoidStatic.GAME_PANEL_DIMENSION.width / 2,
 			ArkanoidStatic.GAME_PANEL_DIMENSION.height / 2);
@@ -67,6 +81,9 @@ public class GameMouseListener implements MouseListener, MouseMotionListener
 		bq.add(new PlayAction());
 	}
 
+	/**
+	 * metoda chowa kursor gdy mysz wejdzie w komponent
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
@@ -78,6 +95,9 @@ public class GameMouseListener implements MouseListener, MouseMotionListener
 		e.getComponent().setCursor(transparentCursor);
 	}
 
+	/**
+	 * metoda przywraca domyœlny kursor gdy mysz opuœci komponent
+	 */
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
@@ -96,6 +116,12 @@ public class GameMouseListener implements MouseListener, MouseMotionListener
 
 	}
 
+	/**
+	 * metoda podaje odpowiedni¹ akcjê do kolejki blokuj¹cej i przesuwa
+	 * kursor na œrodek komponentu
+	 * @param eventPoint punks eventu
+	 * @param windowPoint punkt œrodka ekranu
+	 */
 	private void addAction(Point eventPoint, Point windowPoint)
 	{
 		windowPoint.x += centerPoint.x;
