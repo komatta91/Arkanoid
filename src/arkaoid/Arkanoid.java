@@ -19,7 +19,7 @@ public class Arkanoid
 		Controller controler = new Controller(bq, model, widok);
 		model.setController(controler);
 		controler.start();
-
+		
 	}
 
 }

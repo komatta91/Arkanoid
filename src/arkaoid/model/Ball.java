@@ -47,7 +47,7 @@ public class Ball
 		double random = Math.random();
 		for (int i = 1; i < 7; ++i)
 		{
-			System.out.println(i);
+			//System.out.println(i);
 			if (random < i * 0.17)
 			{
 				setDy(-i);

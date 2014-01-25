@@ -131,7 +131,7 @@ public class Bricks
 	 * @param point œrodek ko³a
 	 * @param radius promieñ
 	 * @param b klocek
-	 * @return
+	 * @return czy klocek usuniety
 	 */
 	private boolean checkBrick(Point point, int radius, Brick b)
 	{

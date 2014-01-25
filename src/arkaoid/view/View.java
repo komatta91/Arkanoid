@@ -7,6 +7,7 @@ import java.util.concurrent.BlockingQueue;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import arkaoid.ArkanoidStatic;
 import arkaoid.Exceptons.ExitException;
 import arkaoid.model.Dummy;
 import arkaoid.view.action.AbstractGameAction;
@@ -53,6 +54,8 @@ public class View
 	 */	
 	public void showMessage(String s)
 	{
+		gameFrame.setVisible(false);
+		mainMenu.setVisible(false);
 		JOptionPane.showMessageDialog(null, s);
 	}
 
@@ -100,7 +103,7 @@ public class View
 	{
 		mainMenu = new MainMenu(bq);
 
-		timer = new Timer(20, new ActionListener()
+		timer = new Timer(ArkanoidStatic.FPS, new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
